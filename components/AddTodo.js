@@ -1,9 +1,26 @@
+import { gql, useMutation } from '@apollo/client'
 import { useState } from 'react'
+
+const ADD_TODO = gql`
+  mutation addTodo($title: String!) {
+    insert_todos_one(object: { title: $title }) {
+      id
+      title
+    }
+  }
+`;
 
 const AddTodo = () => {
   const [title, setTitle] = useState("");
+  const [addTodo] = useMutation(ADD_TODO, {
+    onCompleted: () => setTitle(""),
+  });
 
-  const onSubmit = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addTodo({ variables: { title } });
+  };
+
   return (
     <form onSubmit={onSubmit}>
       <div className='my-4 flex rounded-md shadow-sm'>
