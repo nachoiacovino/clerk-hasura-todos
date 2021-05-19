@@ -1,3 +1,5 @@
+import { SignedIn, SignedOut } from '@clerk/clerk-react'
+import { CogIcon, PencilAltIcon, UserAddIcon } from '@heroicons/react/outline'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -6,10 +8,29 @@ import styles from '../styles/Home.module.css'
 const SignupLink = () => (
   <Link href='/sign-up'>
     <a className={styles.cardContent}>
-      <img src='/icons/user-plus.svg' />
+      <UserAddIcon className='h-7 w-7 text-blue-500' />
       <div>
         <h3>Create an account to start saving todos!</h3>
         <p>This application is auth protected. Create an account to begin.</p>
+      </div>
+      <div className={styles.arrow}>
+        <img src='/icons/arrow-right.svg' />
+      </div>
+    </a>
+  </Link>
+);
+
+const SeeTodos = () => (
+  <Link href='/todos'>
+    <a className={styles.cardContent}>
+      {/* <img src='/icons/user-plus.svg' /> */}
+      <PencilAltIcon className='h-7 w-7 text-blue-500' />
+      <div>
+        <h3>Start saving your todos!</h3>
+        <p>
+          Add new todos and mark them as completed. Everything will be saved in
+          your account!
+        </p>
       </div>
       <div className={styles.arrow}>
         <img src='/icons/arrow-right.svg' />
@@ -31,13 +52,18 @@ const Main = () => (
 
     <div className={styles.cards}>
       <div className={styles.card}>
-        <SignupLink />
+        <SignedIn>
+          <SeeTodos />
+        </SignedIn>
+        <SignedOut>
+          <SignupLink />
+        </SignedOut>
       </div>
 
       <div className={styles.card}>
         <Link href='https://dashboard.clerk.dev'>
           <a target='_blank' rel='noreferrer' className={styles.cardContent}>
-            <img src='/icons/settings.svg' />
+            <CogIcon className='h-7 w-7 text-blue-500' />
             <div>
               <h3>Configure settings for your app</h3>
               <p>
