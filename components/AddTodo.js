@@ -1,6 +1,8 @@
 import { gql, useMutation } from '@apollo/client'
 import { useState } from 'react'
 
+import { GET_TODOS } from './TodoList'
+
 const ADD_TODO = gql`
   mutation addTodo($title: String!) {
     insert_todos_one(object: { title: $title }) {
@@ -18,7 +20,18 @@ const AddTodo = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addTodo({ variables: { title } });
+    addTodo({
+      variables: { title },
+      update: (cache, { data }) => {
+        const existingTodos = cache.readQuery({
+          query: GET_TODOS,
+        });
+        cache.writeQuery({
+          query: GET_TODOS,
+          data: { todos: [data.insert_todos_one, ...existingTodos.todos] },
+        });
+      },
+    });
   };
 
   return (
@@ -32,6 +45,7 @@ const AddTodo = () => {
             id='title'
             className='focus:ring-blue-500 focus:border-blue-500 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300'
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
         </div>
         <button className='-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'>

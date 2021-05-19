@@ -48,6 +48,21 @@ const SingleTodo = ({ todo }) => {
     e.preventDefault();
     toggleTodoMutation({
       variables: { id: todo.id, completed: !todo.completed },
+      optimisticResponse: true,
+      update: (cache) => {
+        const data = cache.readQuery({ query: GET_TODOS });
+        const todos = data.todos.map((t) => {
+          if (t.id === todo.id) {
+            return { ...t, completed: !todo.completed };
+          }
+          return t;
+        });
+
+        cache.writeQuery({
+          query: GET_TODOS,
+          data: { todos },
+        });
+      },
     });
   };
 
