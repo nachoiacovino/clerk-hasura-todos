@@ -1,6 +1,5 @@
 import { gql, useMutation } from '@apollo/client'
 import { TrashIcon } from '@heroicons/react/solid'
-import { useState } from 'react'
 
 const DELETE_TODO = gql`
   mutation deleteTodo($id: uuid!) {
@@ -11,13 +10,32 @@ const DELETE_TODO = gql`
   }
 `;
 
+const TOGGLE_TODO = gql`
+  mutation toggleTodo($id: uuid!, $completed: Boolean!) {
+    update_todos_by_pk(
+      pk_columns: { id: $id }
+      _set: { completed: $completed }
+    ) {
+      id
+      completed
+    }
+  }
+`;
+
 const SingleTodo = ({ todo }) => {
-  const [completed, setCompleted] = useState(todo.completed);
   const [deleteTodoMutation] = useMutation(DELETE_TODO);
+  const [toggleTodoMutation] = useMutation(TOGGLE_TODO);
 
   const deleteTodo = (e) => {
     e.preventDefault();
     deleteTodoMutation({ variables: { id: todo.id } });
+  };
+
+  const toggleTodo = (e) => {
+    e.preventDefault();
+    toggleTodoMutation({
+      variables: { id: todo.id, completed: !todo.completed },
+    });
   };
 
   return (
@@ -27,13 +45,13 @@ const SingleTodo = ({ todo }) => {
           id={todo.id}
           name='completed'
           type='checkbox'
-          checked={completed}
-          onChange={(e) => setCompleted(e.target.checked)}
+          checked={todo.completed}
+          onChange={toggleTodo}
           className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded mr-3'
         />
         <label
           htmlFor={todo.id}
-          className={completed ? "line-through text-gray-400" : ""}
+          className={todo.completed ? "line-through text-gray-400" : ""}
         >
           {todo.title}
         </label>
