@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut } from '@clerk/clerk-react'
-import { CogIcon, PencilAltIcon, UserAddIcon } from '@heroicons/react/outline'
+import { ArrowRightIcon, CogIcon, PencilAltIcon, UserAddIcon } from '@heroicons/react/outline'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -14,7 +14,7 @@ const SignupLink = () => (
         <p>This application is auth protected. Create an account to begin.</p>
       </div>
       <div className={styles.arrow}>
-        <img src='/icons/arrow-right.svg' />
+        <ArrowRightIcon className='h-6 w-6 text-blue-500' />
       </div>
     </a>
   </Link>
@@ -33,7 +33,7 @@ const SeeTodos = () => (
         </p>
       </div>
       <div className={styles.arrow}>
-        <img src='/icons/arrow-right.svg' />
+        <ArrowRightIcon className='h-6 w-6 text-blue-500' />
       </div>
     </a>
   </Link>
@@ -72,7 +72,7 @@ const Main = () => (
               </p>
             </div>
             <div className={styles.arrow}>
-              <img src='/icons/arrow-right.svg' />
+              <ArrowRightIcon className='h-6 w-6 text-blue-500' />
             </div>
           </a>
         </Link>
