@@ -1,14 +1,9 @@
 import { useState } from 'react'
 
-import SingleTodo from '../components/SingleTodo'
+import TodoList from '../components/TodoList'
 
 const todos = () => {
   const [title, setTitle] = useState("");
-  const todos = [
-    { title: "hello", id: "1", completed: false },
-    { title: "hello 2", id: "2", completed: false },
-    { title: "hello 3", id: "3", completed: true },
-  ];
 
   const onSubmit = () => {};
 
@@ -18,7 +13,7 @@ const todos = () => {
         <h1 className='text-3xl font-bold '>My todos!</h1>
 
         <form onSubmit={onSubmit}>
-          <div className='mt-4 flex rounded-md shadow-sm'>
+          <div className='my-4 flex rounded-md shadow-sm'>
             <div className='relative flex items-stretch flex-grow focus-within:z-10'>
               <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'></div>
               <input
@@ -34,14 +29,7 @@ const todos = () => {
             </button>
           </div>
         </form>
-
-        <div className='bg-white shadow overflow-hidden rounded-md mt-3'>
-          <ul className='divide-y divide-gray-200'>
-            {todos.map((todo) => (
-              <SingleTodo key={todo.id} todo={todo} />
-            ))}
-          </ul>
-        </div>
+        <TodoList />
       </div>
     </div>
   );
