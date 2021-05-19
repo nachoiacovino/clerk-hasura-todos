@@ -1,39 +1,18 @@
-import Head from "next/head";
-import Link from "next/link";
-import styles from "../styles/Home.module.css";
-import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import Head from 'next/head'
+import Link from 'next/link'
 
-const ClerkFeatures = () => (
-  <Link href="/user">
-    <a className={styles.cardContent}>
-      <img src="/icons/layout.svg" />
-      <div>
-        <h3>Explore features provided by Clerk</h3>
-        <p>
-          Interact with the user button, user profile, and more to preview what
-          your users will see
-        </p>
-      </div>
-      <div className={styles.arrow}>
-        <img src="/icons/arrow-right.svg" />
-      </div>
-    </a>
-  </Link>
-);
+import styles from '../styles/Home.module.css'
 
 const SignupLink = () => (
-  <Link href="/sign-up">
+  <Link href='/sign-up'>
     <a className={styles.cardContent}>
-      <img src="/icons/user-plus.svg" />
+      <img src='/icons/user-plus.svg' />
       <div>
-        <h3>Sign up for an account</h3>
-        <p>
-          Sign up and sign in to explore all the features provided by Clerk
-          out-of-the-box
-        </p>
+        <h3>Create an account to start saving todos!</h3>
+        <p>This application is auth protected. Create an account to begin.</p>
       </div>
       <div className={styles.arrow}>
-        <img src="/icons/arrow-right.svg" />
+        <img src='/icons/arrow-right.svg' />
       </div>
     </a>
   </Link>
@@ -47,23 +26,18 @@ const SignupLink = () => (
 // https://docs.clerk.dev/frontend/react/signedin-and-signedout
 const Main = () => (
   <main className={styles.main}>
-    <h1 className={styles.title}>Welcome to your new app</h1>
-    <p className={styles.description}>Sign up for an account to get started</p>
+    <h1 className={styles.title}>Fullstack todos!</h1>
+    <p className={styles.description}>Bringing fullstack to the frontend</p>
 
     <div className={styles.cards}>
       <div className={styles.card}>
-        <SignedIn>
-          <ClerkFeatures />
-        </SignedIn>
-        <SignedOut>
-          <SignupLink />
-        </SignedOut>
+        <SignupLink />
       </div>
 
       <div className={styles.card}>
-        <Link href="https://dashboard.clerk.dev">
-          <a target="_blank" rel="noreferrer" className={styles.cardContent}>
-            <img src="/icons/settings.svg" />
+        <Link href='https://dashboard.clerk.dev'>
+          <a target='_blank' rel='noreferrer' className={styles.cardContent}>
+            <img src='/icons/settings.svg' />
             <div>
               <h3>Configure settings for your app</h3>
               <p>
@@ -72,7 +46,7 @@ const Main = () => (
               </p>
             </div>
             <div className={styles.arrow}>
-              <img src="/icons/arrow-right.svg" />
+              <img src='/icons/arrow-right.svg' />
             </div>
           </a>
         </Link>
@@ -80,13 +54,13 @@ const Main = () => (
     </div>
 
     <div className={styles.links}>
-      <Link href="https://docs.clerk.dev">
-        <a target="_blank" rel="noreferrer" className={styles.link}>
+      <Link href='https://docs.clerk.dev'>
+        <a target='_blank' rel='noreferrer' className={styles.link}>
           <span className={styles.linkText}>Read Clerk documentation</span>
         </a>
       </Link>
-      <Link href="https://nextjs.org/docs">
-        <a target="_blank" rel="noreferrer" className={styles.link}>
+      <Link href='https://nextjs.org/docs'>
+        <a target='_blank' rel='noreferrer' className={styles.link}>
           <span className={styles.linkText}>Read NextJS documentation</span>
         </a>
       </Link>
@@ -98,14 +72,14 @@ const Main = () => (
 const Footer = () => (
   <footer className={styles.footer}>
     <a
-      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      target="_blank"
-      rel="noopener noreferrer"
+      href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+      target='_blank'
+      rel='noopener noreferrer'
     >
       Powered by{" "}
-      <img src="/clerk.svg" alt="Clerk.dev" className={styles.logo} />
+      <img src='/clerk.svg' alt='Clerk.dev' className={styles.logo} />
       +
-      <img src="/nextjs.svg" alt="Next.js" className={styles.logo} />
+      <img src='/nextjs.svg' alt='Next.js' className={styles.logo} />
     </a>
   </footer>
 );
@@ -114,10 +88,10 @@ const Home = () => (
   <div className={styles.container}>
     <Head>
       <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
+      <link rel='icon' href='/favicon.ico' />
       <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        name='viewport'
+        content='width=device-width, initial-scale=1.0'
       ></meta>
     </Head>
     <Main />

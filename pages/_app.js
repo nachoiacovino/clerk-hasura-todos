@@ -1,13 +1,10 @@
-import "../styles/globals.css";
-import {
-  ClerkProvider,
-  RedirectToSignIn,
-  SignedIn,
-  SignedOut,
-} from "@clerk/clerk-react";
-import { useRouter } from "next/router";
-import Layout from "../components/Layout";
-import { ApolloProviderWrapper } from "../lib/apolloClient";
+import '../styles/globals.css'
+
+import { ClerkProvider, RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
+import { useRouter } from 'next/router'
+
+import Layout from '../components/Layout'
+import { ApolloProviderWrapper } from '../lib/apolloClient'
 
 /**
  * List pages you want to be publicly accessible, or leave empty if
