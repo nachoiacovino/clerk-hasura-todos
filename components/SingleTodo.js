@@ -1,10 +1,24 @@
+import { gql, useMutation } from '@apollo/client'
 import { TrashIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
 
+const DELETE_TODO = gql`
+  mutation deleteTodo($id: uuid!) {
+    delete_todos_by_pk(id: $id) {
+      id
+      title
+    }
+  }
+`;
+
 const SingleTodo = ({ todo }) => {
   const [completed, setCompleted] = useState(todo.completed);
+  const [deleteTodoMutation] = useMutation(DELETE_TODO);
 
-  const deleteTodo = () => {};
+  const deleteTodo = (e) => {
+    e.preventDefault();
+    deleteTodoMutation({ variables: { id: todo.id } });
+  };
 
   return (
     <li key={todo.id} className='px-6 py-4 flex justify-between'>
