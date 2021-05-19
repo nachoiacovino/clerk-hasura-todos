@@ -1,6 +1,8 @@
 import { gql, useMutation } from '@apollo/client'
 import { TrashIcon } from '@heroicons/react/solid'
 
+import { GET_TODOS } from './TodoList'
+
 const DELETE_TODO = gql`
   mutation deleteTodo($id: uuid!) {
     delete_todos_by_pk(id: $id) {
@@ -28,7 +30,18 @@ const SingleTodo = ({ todo }) => {
 
   const deleteTodo = (e) => {
     e.preventDefault();
-    deleteTodoMutation({ variables: { id: todo.id } });
+    deleteTodoMutation({
+      variables: { id: todo.id },
+      optimisticResponse: true,
+      update: (cache) => {
+        const data = cache.readQuery({ query: GET_TODOS });
+        const todos = data.todos.filter(({ id }) => id !== todo.id);
+        cache.writeQuery({
+          query: GET_TODOS,
+          data: { todos },
+        });
+      },
+    });
   };
 
   const toggleTodo = (e) => {

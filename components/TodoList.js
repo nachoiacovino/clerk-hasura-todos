@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 
 import SingleTodo from '../components/SingleTodo'
 
-const GET_TODOS = gql`
+export const GET_TODOS = gql`
   query getTodos {
     todos(order_by: { created_at: desc }) {
       id
