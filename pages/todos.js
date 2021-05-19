@@ -1,11 +1,13 @@
 import { useState } from 'react'
 
+import SingleTodo from '../components/SingleTodo'
+
 const todos = () => {
   const [title, setTitle] = useState("");
   const todos = [
-    { title: "hello", id: "1" },
-    { title: "hello 2", id: "2" },
-    { title: "hello 3", id: "3" },
+    { title: "hello", id: "1", completed: false },
+    { title: "hello 2", id: "2", completed: false },
+    { title: "hello 3", id: "3", completed: true },
   ];
 
   const onSubmit = () => {};
@@ -36,9 +38,7 @@ const todos = () => {
         <div className='bg-white shadow overflow-hidden rounded-md mt-3'>
           <ul className='divide-y divide-gray-200'>
             {todos.map((todo) => (
-              <li key={todo.id} className='px-6 py-4'>
-                {todo.title}
-              </li>
+              <SingleTodo key={todo.id} todo={todo} />
             ))}
           </ul>
         </div>
