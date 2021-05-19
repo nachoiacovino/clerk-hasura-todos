@@ -2,12 +2,17 @@ import { useState } from 'react'
 
 const todos = () => {
   const [title, setTitle] = useState("");
+  const todos = [
+    { title: "hello", id: "1" },
+    { title: "hello 2", id: "2" },
+    { title: "hello 3", id: "3" },
+  ];
 
   const onSubmit = () => {};
 
   return (
     <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center mt-32'>
-      <div className='max-w-3xl mx-auto'>
+      <div className='max-w-3xl mx-auto w-4/12'>
         <h1 className='text-3xl font-bold '>My todos!</h1>
 
         <form onSubmit={onSubmit}>
@@ -27,6 +32,16 @@ const todos = () => {
             </button>
           </div>
         </form>
+
+        <div className='bg-white shadow overflow-hidden rounded-md mt-3'>
+          <ul className='divide-y divide-gray-200'>
+            {todos.map((todo) => (
+              <li key={todo.id} className='px-6 py-4'>
+                {todo.title}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
